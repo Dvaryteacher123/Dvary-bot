@@ -1,4 +1,13 @@
-"scripts": {
-  "start": "node index.js"
+{
+  "name": "dvary-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "baileys": "latest",
+    "qrcode-terminal": "^0.12.0"
+  }
 }
-
