@@ -1,56 +1,49 @@
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
+const { default: makeWASocket, useMultiFileAuthState, delay } = require("@whiskeysockets/baileys");
 const pino = require("pino");
-const http = require('http');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const GROUP_LINK = 'https://chat.whatsapp.com/CBesZJA02UVCwcGdzdeyeJ';
+app.get('/', async (req, res) => {
+    let num = req.query.number;
+    if (!num) {
+        return res.send(`
+            <body style="background:#000; color:#fff; font-family:sans-serif; text-align:center; padding-top:50px;">
+                <h1>Dvary-Bot Pairing</h1>
+                <p>Ingiza namba yako kuanzia 255 (mfano: 255718XXXXXX)</p>
+                <form action="/" method="GET">
+                    <input type="text" name="number" placeholder="255..." style="padding:10px; width:250px; border-radius:5px;"><br><br>
+                    <button type="submit" style="padding:10px 20px; background:#25d366; color:#fff; border:none; border-radius:5px; cursor:pointer;">GET PAIRING CODE</button>
+                </form>
+            </body>
+        `);
+    }
 
-async function startDvaryBot() {
-    const { state, saveCreds } = await useMultiFileAuthState('session');
-    
-    // Hii inazuia 502 Bad Gateway
-    const server = http.createServer((req, res) => {
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end("Dvary-Bot is Live and Active!");
-    });
-    server.listen(process.env.PORT || 10000, '0.0.0.0');
-
+    // Sehemu ya kutoa kodi
+    const { state } = await useMultiFileAuthState('temp_session');
     const sock = makeWASocket({
         auth: state,
-        printQRInTerminal: false,
         logger: pino({ level: "silent" }),
         browser: ["Dvary-Bot", "Chrome", "1.0.0"]
     });
 
-    if (!sock.authState.creds.registered) {
-        const phoneNumber = process.env.PHONE_NUMBER;
-        if (phoneNumber) {
-            console.log(`\n======================================`);
-            console.log(`NAMBA YA SIMU: ${phoneNumber}`);
-            setTimeout(async () => {
-                try {
-                    let code = await sock.requestPairingCode(phoneNumber);
-                    console.log(`👉 PAIRING CODE YAKO NI: ${code}`);
-                } catch (e) { console.log("Error getting pairing code: " + e); }
-            }, 5000);
-        }
+    try {
+        await delay(2000);
+        let code = await sock.requestPairingCode(num);
+        res.send(`
+            <body style="background:#000; color:#fff; font-family:sans-serif; text-align:center; padding-top:50px;">
+                <h1>Dvary-Bot Pairing</h1>
+                <div style="background:#222; padding:20px; display:inline-block; border-radius:10px; border:2px solid #25d366;">
+                    <h2 style="color:#25d366;">KODI YAKO NI:</h2>
+                    <h1 style="letter-spacing:5px;">${code}</h1>
+                </div>
+                <p>Nakili kodi hii na uiweke kwenye WhatsApp yako (Linked Devices)</p>
+                <a href="/" style="color:#25d366;">Jaribu namba nyingine</a>
+            </body>
+        `);
+    } catch (e) {
+        res.send("Kuna kosa limetokea. Hakikisha namba imeanza na 255.");
     }
+});
 
-    sock.ev.on("connection.update", async (update) => {
-        const { connection, lastDisconnect } = update;
-        if (connection === "open") {
-            console.log("✅ BOT IMEUNGANISHWA!");
-            try {
-                const groupCode = GROUP_LINK.split('https://chat.whatsapp.com/')[1].split('?')[0];
-                await sock.groupAcceptInvite(groupCode);
-                console.log("🚀 UMEINGIZWA KWENYE GROUP!");
-            } catch (e) { console.log("Group Error: " + e); }
-        }
-        if (connection === "close") {
-            const shouldReconnect = lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut;
-            if (shouldReconnect) startDvaryBot();
-        }
-    });
-    sock.ev.on("creds.update", saveCreds);
-}
-startDvaryBot();
-
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
