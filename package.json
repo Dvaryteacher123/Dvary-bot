@@ -1,7 +1,12 @@
 {
+  "name": "dvary-ai-calculator",
+  "version": "1.0.0",
+  "description": "AI Calculator by Dvary",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
   "dependencies": {
-    "express": "^4.18.2",
-    "@whiskeysockets/baileys": "^6.5.0",
-    "pino": "^8.14.1"
+    "serve": "^14.0.0"
   }
 }
