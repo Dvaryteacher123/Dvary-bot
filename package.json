@@ -1,12 +1,18 @@
+
+}
 {
-  "name": "dvary-ai-calculator",
+  "name": "dvary-bot-v10",
   "version": "1.0.0",
-  "description": "AI Calculator by Dvary",
-  "main": "index.html",
-  "scripts": {
-    "start": "serve ."
-  },
+  "description": "Dvary AI WhatsApp Bot System",
+  "main": "index.js",
   "dependencies": {
-    "serve": "^14.0.0"
+    "@whiskeysockets/baileys": "latest",
+    "pino": "^8.1.0",
+    "express": "^4.18.2",
+    "qrcode-terminal": "^0.12.0",
+    "axios": "^1.4.0"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
