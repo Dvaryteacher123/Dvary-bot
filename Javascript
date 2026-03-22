@@ -1,7 +1,0 @@
-module.exports = {
-    botName: "Dvary-Bot",
-    ownerName: "Dvary",
-    ownerNumber: "255712345678", // BADILISHA WEKA NAMBA YAKO HAPA
-    prefix: ".", 
-    sessionName: "session"
-};
