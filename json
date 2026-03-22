@@ -1,0 +1,10 @@
+{
+  "name": "Dvary-Bot",
+  "description": "WhatsApp automation script by Dvary",
+  "repository": "https://github.com/username/dvary-bot",
+  "stack": "container",
+  "env": {
+    "SESSION_ID": { "description": "Weka Session ID yako hapa", "required": true },
+    "OWNER_NUMBER": { "description": "Namba yako ya simu", "required": true }
+  }
+}
