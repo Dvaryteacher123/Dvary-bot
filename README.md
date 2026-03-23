@@ -1,44 +1,53 @@
-👨‍💻 DVARY-TEACH-BOT SMART ASSISTANT 🖥️
-​<p align="center">
-<img src="https://www.google.com/search?q=https://telegra.ph/file/2cc38d2121e780a424a52.jpg" alt="Dvary Teach Banner" width="800">
+# 👨‍💻 DVARY TEACH SMART ASSISTANT
+
+<p align="center">
+  <img src="https://telegra.ph/file/2cc38d2121e780a424a52.jpg" alt="Dvary Teach Banner" width="800">
 </p>
-​<p align="center">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/VERSION-2.0.5-00FF00%3Fstyle%3Dfor-the-badge%26logo%3Dgithub">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/STATUS-RUNNING-blue%3Fstyle%3Dfor-the-badge%26logo%3Dstatuspage">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/OWNER-DVARY_TEACH-red%3Fstyle%3Dfor-the-badge">
+
+<p align="center">
+  <em>"Msaidizi wako wa kidijitali wa kufundisha na otomatiki."</em>
 </p>
-​🟢 SYSTEM INTERFACE: ACTIVE 🟢
-​Maelezo ya Mradi: Mfumo huu ni bot ya WhatsApp iliyoboreshwa kwa ajili ya kutoa huduma za kijasusi, otomatiki, na zana za kiufundi kwa urahisi zaidi kupitia simu yako. MAENEO YA MUHIMU (CONNECTIVITY HUB)
-​1️⃣ PATA SESSION ID (PAIRING CODE)
-​Bofya kitufe cha kijani hapa chini kupata kodi ya kuunganishia bot yako na WhatsApp:
-​<p align="center">
-<a href="https://dvary-teache.vercel.app">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/%253E_GET_PAIRING_CODE-00FF00%3Fstyle%3Dfor-the-badge%26logo%3Dwhatsapp%26logoColor%3Dblack" alt="Get Session">
-</a>
+
+---
+
+### 📚 Kuhusu Mradi Huu
+**Dvary Teach** ni mfumo wa kisasa uliojengwa kwa teknolojia ya bot ya WhatsApp. Lengo letu ni kutoa zana za kielimu na kiufundi zinazopatikana saa 24/7 kwa kutumia nguvu ya otomatiki.
+
+---
+
+### 📌 Hatua za Kuunganisha (Setup Guide)
+
+#### Step 1: Pata Session ID Yako
+Bonyeza kitufe hapa chini ili kuanza mchakato wa kupata kodi yako ya kipekee:
+
+<p align="center">
+  <a href="https://bwmxmd.site/pair">
+    <img src="https://img.shields.io/badge/GET%20SESSION%20CODE-GREEN?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Get Session">
+  </a>
 </p>
-​2️⃣ WEKA BOT MTANDAONI (DEPLOYMENT)
-​Chagua seva unayopenda kuitumia kuwasha bot yako (Deploy):
-​<p align="center">
-<a href="[kiungo cha kutiliwa shaka kimeondolewa]">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/%253E_HEROKU_DEPLOY-8A2BE2%3Fstyle%3Dfor-the-badge%26logo%3Dheroku">
-</a>
-<a href="https://render.com/">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/%253E_RENDER_DEPLOY-00BFFF%3Fstyle%3Dfor-the-badge%26logo%3Drender">
-</a>
-<a href="https://railway.app/">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/%253E_RAILWAY_DEPLOY-A52A2A%3Fstyle%3Dfor-the-badge%26logo%3Drailway">
-</a>
+
+#### Step 2: Chagua Platform ya Hosting
+Hifadhi na washa bot yako mtandaoni kwa kutumia mojawapo ya huduma hizi:
+
+<p align="center">
+  <a href="https://dashboard.heroku.com/">
+    <img src="https://img.shields.io/badge/DEPLOY%20ON%20HEROKU-PURPLE?style=for-the-badge&logo=heroku&logoColor=white">
+  </a>
+  <a href="https://render.com/">
+    <img src="https://img.shields.io/badge/DEPLOY%20ON%20RENDER-BLUE?style=for-the-badge&logo=render&logoColor=white">
+  </a>
+  <a href="https://railway.app/">
+    <img src="https://img.shields.io/badge/DEPLOY%20ON%20RAILWAY-BROWN?style=for-the-badge&logo=railway&logoColor=white">
+  </a>
 </p>
-​🛠️ TEKNOLOJIA ZILIZOTUMIKA
-​<p align="left">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/Node.js-339933%3Fstyle%3Dflat-square%26logo%3Dnodedotjs%26logoColor%3Dwhite">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/JavaScript-F7DF1E%3Fstyle%3Dflat-square%26logo%3Djavascript%26logoColor%3Dblack">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/WhatsApp_API-25D366%3Fstyle%3Dflat-square%26logo%3Dwhatsapp%26logoColor%3Dwhite">
+
+---
+
+### 📺 Mafunzo ya Video (Tutorial)
+Kama ni mara yako ya kwanza, angalia mwongozo huu wa hatua kwa hatua:
+
+<p align="center">
+  <a href="https://youtube.com">
+    <img src="https://img.shields.io/badge/WATCH%20TUTORIAL-RED?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Video">
+  </a>
 </p>
-​<p align="right">
-<code>© 2026 Dvary Teach Assistant - Created by @dullamanyama0-eng</code>
-</p>[+] Initializing Dvary-Teach-Engine...
-[+] System: MD-Architecture Loaded [OK]
-[+] Security Protocol: Stealth-Mode [ACTIVE]
-[+] Connecting to Global Nodes... 100%
-[+] Welcome, Dvary User. System is Fully Stable.
