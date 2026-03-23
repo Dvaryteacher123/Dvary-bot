@@ -1,4 +1,3 @@
-// Hizi hapa ni Firebase Config zako kutoka kwenye picha uliyonitumia
 const firebaseConfig = {
   apiKey: "AIzaSyAD4F_K5wzHRjX9qmmT7L9-4L-T-F089kU",
   authDomain: "dvary-teacher.firebaseapp.com",
@@ -10,10 +9,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const storage = firebase.storage();
 
-// Password yako ya kuingia
 const SECRET_PASSWORD = "dvary";
 
 // Elements
@@ -24,7 +22,7 @@ const uploadBtn = document.getElementById('upload-btn');
 const fileInput = document.getElementById('file-input');
 const progressText = document.getElementById('progress-text');
 
-// Login Logic
+// Login
 function checkPassword() {
     if (passwordInput.value === SECRET_PASSWORD) {
         loginSection.style.display = 'none';
@@ -34,11 +32,11 @@ function checkPassword() {
     }
 }
 
-// Upload Logic
+// Upload
 uploadBtn.addEventListener('click', () => {
     const file = fileInput.files[0];
     if (!file) {
-        alert('Tafadhali chagua faili kwanza!');
+        alert('Chagua faili kwanza!');
         return;
     }
 
@@ -52,11 +50,11 @@ uploadBtn.addEventListener('click', () => {
         }, 
         (error) => {
             console.error(error);
-            alert('Imefeli! Hakikisha uliwasha Rules kule Firebase Storage kuwa TRUE.');
+            alert('Imefeli! Hakikisha uli-Publish Rules kule Firebase Storage.');
         }, 
         () => {
             progressText.innerText = "Imekamilika! ✅";
-            alert('Hongera! Faili lako limehifadhiwa Cloud.');
+            alert('Safi! Faili limepanda.');
             fileInput.value = ''; 
         }
     );
