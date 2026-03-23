@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="sw">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dvary Doc Vault</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dvary Document Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 </head>
-<body>
-
-    <div id="loginBox" class="container">
-        <h1>🔒 Private Vault</h1>
-        <p>Ingiza password kufungua documents</p>
-        <input type="password" id="passInput" placeholder="Password hapa...">
-        <button onclick="checkPassword()">Fungua</button>
+<body class="bg-slate-900 text-white flex items-center justify-center min-h-screen">
+    <div id="login-section" class="p-8 bg-slate-800 rounded-lg shadow-xl text-center">
+        <h1 class="text-2xl font-bold mb-4">Ingia Panel</h1>
+        <input type="password" id="password-input" placeholder="Password" class="p-2 rounded bg-slate-700 mb-4 w-full text-center border border-slate-600 focus:outline-none focus:border-blue-500">
+        <button onclick="checkPassword()" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded font-bold w-full transition">Ingia</button>
     </div>
 
-    <div id="vaultBox" class="container hidden">
-        <h1>📂 Document Manager</h1>
-        <div class="upload-area">
-            <input type="file" id="fileChooser">
-            <button id="uploadBtn" onclick="uploadToFirebase()">Upload kwa Cloud</button>
+    <div id="main-section" class="hidden p-8 bg-slate-800 rounded-lg shadow-xl w-80 text-center">
+        <h1 class="text-2xl font-bold mb-6">📁 Document Manager</h1>
+        <div class="border-2 border-dashed border-slate-600 p-4 rounded-lg mb-4">
+            <input type="file" id="file-input" class="text-sm mb-4 block w-full text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+            <button id="upload-btn" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded font-bold w-full transition mb-4">Upload kwa Cloud</button>
+            <p id="progress-text" class="text-sm font-mono">Tayari kuanza...</p>
         </div>
-        <div id="progressBox">
-            <p id="statusText">Tayari kupokea faili...</p>
-        </div>
-        <hr>
-        <h3>Documents Zilizopo:</h3>
-        <ul id="fileList"></ul>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
