@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBER-TOOLBOX PRO</title>
+    <title>CYBER-TOOLBOX PRO | MASTER ELIA</title>
     <style>
-        body { background-color: black; color: #00FF00; font-family: 'Courier New', Courier, monospace; text-align: center; padding: 50px; }
-        .box { border: 2px solid #00FF00; padding: 20px; display: inline-block; border-radius: 10px; box-shadow: 0 0 15px #00FF00; }
-        h1 { font-size: 25px; text-shadow: 2px 2px #ff0000; }
-        .btn { background-color: #00FF00; color: black; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; display: block; margin: 20px 0; }
-        .glitch { color: white; font-size: 12px; }
+        body { background-color: #000; color: #0dff00; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .terminal-box { border: 1px solid #0dff00; padding: 30px; border-radius: 5px; box-shadow: 0 0 20px rgba(13, 255, 0, 0.2); text-align: center; max-width: 400px; }
+        h1 { font-size: 22px; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .status { color: #ff0000; font-size: 12px; margin-bottom: 20px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .nav-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #0dff00; color: #0dff00; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .nav-btn:hover { background: #0dff00; color: #000; }
+        .contact { color: #00bfff; font-size: 11px; margin-top: 15px; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>[ CYBER-TOOLBOX PRO ]</h1>
-        <p class="glitch">SYSTEM STATUS: ENCRYPTED</p>
-        <hr color="#00FF00">
-        <p>Welcome, Agent. Access your tools below:</p>
+    <div class="terminal-box">
+        <h1>[ CYBER TOOLBOX ]</h1>
+        <p class="status">SECURITY STATUS: ENCRYPTED</p>
+        <hr border="1" color="#111">
         
-        <a href="#" class="btn">📺 CYBER ACADEMY</a>
-        <a href="#" class="btn">📂 SECRET DOCS</a>
-        <a href="https://wa.me/225694670586" class="btn" style="background-color: #25D366;">📞 CONTACT MASTER ELIA</a>
+        <a href="#" class="nav-btn">VIDEO TUTORIALS</a>
+        <a href="#" class="nav-btn">TOOLS & COMMANDS</a>
+        <a href="#" class="nav-btn">SECRET DOCUMENTS</a>
+        <a href="https://wa.me/225694670586" class="nav-btn" style="border-color: #25d366; color: #25d366;">CONTACT DEVELOPER</a>
         
-        <p style="font-size: 10px;">© 2026 DVARY HACKER CORPS</p>
+        <p class="contact">SYSTEM MAINTAINED BY MASTER ELIA</p>
     </div>
 </body>
 </html>
