@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVARY PREMIUM</title>
+    <style>
+        body { background: #000; color: #fff; text-align: center; margin: 0; font-family: sans-serif; }
+        .container { width: 100%; max-width: 500px; margin: auto; position: relative; }
+        video { width: 100%; background: #111; border-bottom: 3px solid #25D366; }
+        #locker { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); flex-direction: column; align-items: center; justify-content: center; z-index: 100; }
+        .btn { background: #25D366; color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>📺 PREVIEW MODE (15 SEC)</p>
+    <video id="dvaryVideo" controls playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    <div id="locker">
+        <h2 style="color:#25D366">🔒 IMEFUNGWA</h2>
+        <p>Lipia TZS 500 uone video yote.</p>
+        <a href="https://wa.me/225694670587?text=Nimelipia%20Video" class="btn">✅ LIPIA WHATSAPP</a>
+    </div>
+</div>
+<script>
+    const video = document.getElementById("dvaryVideo");
+    const locker = document.getElementById("locker");
+    video.ontimeupdate = function() {
+        if (video.currentTime >= 15) {
+            video.pause();
+            video.currentTime = 15;
+            locker.style.display = "flex";
+        }
+    };
+</script>
+</body>
+</html>
+
