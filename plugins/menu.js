@@ -1,0 +1,82 @@
+const help = async (dest, conn, m, { prefix, pushname, runtime }) => {
+const dvaryMenu = `
+╭━━───────────────➤─➤
+┃    *𝗗𝗩𝗔𝗥𝗬_𝗦𝗘𝗖𝗨𝗥𝗜𝗧𝗬 𝗩2* 🛡️
+┃
+┃➤🗿 𝚄𝚂𝙴𝙴 : ${pushname}
+┃➤📉 𝚅𝙴𝚁𝚂 : 2.0 (Official)
+┃➤📳 𝙼𝙾𝙳𝙴 : PUBLIC
+┃➤⚙️ 𝙿𝚁𝙴𝙵𝙸𝚇 : ${prefix}
+┃➤💾 𝚁𝙰𝙼 : 64 GB
+┃➤👨🏽‍💻 𝙳𝙴𝚅 : ELIA MANYAMA
+┃➤⏱️ 𝚂𝙿𝙴𝙴𝙳 : ${runtime}
+╰━━───────────────➤─➤
+
+╭━━──────────────➤─➤
+┃  > 𝗢𝗪𝗡𝗘𝗥 𝗠𝗘𝗡𝗨👤 <
+┃─➤ .setpp
+┃─➤ .owner
+┃─➤ .repo
+┃─➤ .alive
+┃─➤ .ping
+┃─➤ .runtime 
+┃─➤ .public
+╰━━──────────────➤─➤
+
+╭━━──────────────➤─➤
+┃ > 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗 𝗠𝗘𝗡𝗨📂 <
+┃─➤ .play
+┃─➤ .tiktok
+┃─➤ .ytsearch
+┃─➤ .spotify
+┃─➤ .apk
+┃─➤ .mediafire
+╰━━──────────────➤─➤
+
+╭━━──────────────➤─➤
+┃  > 𝗚𝗥𝗢𝗨𝗣 𝗠𝗘𝗡𝗨👥 <
+┃─➤ .hidetag
+┃─➤ .tagall
+┃─➤ .demote
+┃─➤ .promote
+┃─➤ .mute
+┃─➤ .unmute
+┃─➤ .kick
+┃─➤ .add
+┃─➤ .antilink
+╰━━──────────────➤─➤
+
+╭━━──────────────➤─➤
+┃  > 𝗦𝗧𝗜𝗖𝗞𝗘𝗥 𝗠𝗘𝗡𝗨🤡 <
+┃─➤ .sticker
+┃─➤ .cry
+┃─➤ .kill
+┃─➤ .hug
+┃─➤ .slap
+┃─➤ .kiss
+╰━━──────────────➤─➤
+
+╭━━──────────────➤─➤
+┃  > 𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗠𝗘𝗡𝗨🥇 <
+┃─➤ .numban 🎭
+┃─➤ .numspam 🥵
+┃─➤ .numbug 🐛
+╰━━──────────────➤─➤
+
+ ❀𝐁𝐘 𝐃𝐕𝐀𝐑𝐘 𝐒𝐄𝐂𝐔𝐑𝐈𝐓𝐘 𝐓𝐄𝐂𝐇 ❀`
+
+await conn.sendMessage(dest, { 
+    text: dvaryMenu,
+    contextInfo: {
+        externalAdReply: {
+            title: "DVARY-V2 OFFICIAL",
+            body: "Master of Tech: Elia Manyama",
+            thumbnailUrl: "https://telegra.ph/file/54efddccf41281ad7ec51.jpg",
+            sourceUrl: "https://github.com/dullamanyama0-eng/DVARY-V2-OFFICIAL",
+            mediaType: 1,
+            renderLargerThumbnail: true
+        }
+    }
+}, { quoted: m })
+}
+
