@@ -3,45 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DVARY PREMIUM PREVIEW</title>
+    <title>DVARY PREMIUM PLAYER</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
-        .video-container { position: relative; width: 100%; max-width: 600px; margin: auto; background: #111; }
-        video { width: 100%; border-bottom: 3px solid #25D366; }
+        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding: 0; overflow-x: hidden; }
+        .main-container { width: 100%; max-width: 500px; margin: auto; position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         
+        /* Video Styling */
+        video { width: 100%; background: #111; border-top: 2px solid #25D366; border-bottom: 2px solid #25D366; }
+        
+        /* The Locker Overlay */
         #locker {
             display: none;
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.95);
             flex-direction: column; align-items: center; justify-content: center;
-            z-index: 10;
+            z-index: 999;
         }
-        .wa-btn {
-            background: #25D366; color: #fff; padding: 15px 30px;
-            border: none; border-radius: 30px; font-size: 18px;
-            font-weight: bold; cursor: pointer; margin-top: 20px;
-            text-decoration: none; display: inline-block;
+
+        .pay-btn {
+            background: #25D366; color: #fff; padding: 18px 35px;
+            border: none; border-radius: 50px; font-size: 20px;
+            font-weight: bold; cursor: pointer; text-decoration: none;
+            display: inline-block; margin-top: 20px; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
         }
-        .alert { color: #ffcc00; font-size: 14px; margin-top: 10px; }
+
+        .preview-tag { background: #25D366; color: #000; padding: 5px 15px; border-radius: 5px; font-weight: bold; font-size: 12px; margin-bottom: 10px; display: inline-block; }
     </style>
 </head>
 <body>
 
-<div class="video-container">
-    <h2 style="font-size: 16px; padding: 10px; color: #ccc;">📺 PREVIEW MODE (SEKUNDE 15)</h2>
-    
-    <video id="dvaryVideo" controls controlsList="nodownload">
+<div class="main-container">
+    <div>
+        <span class="preview-tag">PREVIEW MODE (15 SEC)</span>
+    </div>
+
+    <video id="dvaryVideo" controls playsinline preload="metadata">
         <source src="https://files.catbox.moe/ej5y26.mp4" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
 
     <div id="locker">
-        <h2 style="color:#25D366">🔒 MWISHO WA PREVIEW</h2>
-        <p style="padding: 0 20px;">Ili kutazama video hii yote (Full Video), unapaswa kulipia TZS 500.</p>
+        <h2 style="color:#25D366; font-size: 28px;">🔒 IMEFUNGWA!</h2>
+        <p style="padding: 0 30px; font-size: 16px; color: #ccc;">Ili kuendelea kutazama video hii nzima, lipia TZS 500 sasa hivi.</p>
         
-        <a href="https://wa.me/225694670587?text=Habari%20Master%20Dvary,%20nimelipia%20nataka%20full%20video%20ya%20premium." class="wa-btn">
-            ✅ PATA FULL VIDEO (WHATSAPP)
+        <a href="https://wa.me/225694670587?text=Habari%20Master%20Dvary,%20nataka%20lipia%20video%20yako%20ya%20Premium%20ili%20niione%20yote." class="pay-btn">
+            LIPIA WHATSAPP ✅
         </a>
-        <p class="alert">Ukimaliza kulipia utapewa link ya kuiona yote.</p>
+        <p style="font-size: 12px; margin-top: 20px; color: #555;">Dvary Technology &copy; 2026</p>
     </div>
 </div>
 
@@ -49,22 +57,25 @@
     const video = document.getElementById("dvaryVideo");
     const locker = document.getElementById("locker");
     
-    // 1. CHAGUA SEKUNDE YA KUSIMAMISHA
-    const stopTime = 15; 
+    // SEKUNDE YA KUSIMAMISHA VIDEO
+    const stopAt = 15; 
 
+    // Inasikiliza muda wa video unapoendelea
     video.ontimeupdate = function() {
-        // Izuie video isicheze baada ya stopTime
-        if (video.currentTime >= stopTime) {
+        if (video.currentTime >= stopAt) {
             video.pause();
-            video.currentTime = stopTime;
+            video.currentTime = stopAt;
             locker.style.display = "flex";
+            
+            // Inazuia isitoke kwenye fullscreen ikiwa imejifunga
+            if (document.exitFullscreen) { document.exitFullscreen(); }
         }
     };
 
-    // 2. ZUIA MTU ASIPELKE MBELE (Fast Forward)
+    // Inazuia mteja asivute video kwenda mbele (Scrubbing)
     video.onseeking = function() {
-        if (video.currentTime > stopTime) {
-            video.currentTime = stopTime;
+        if (video.currentTime > stopAt) {
+            video.currentTime = stopAt;
             video.pause();
             locker.style.display = "flex";
         }
