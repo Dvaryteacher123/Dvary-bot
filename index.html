@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVARY PREMIUM | VIDEO LOCKER</title>
+    <style>
+        body { background: #0b0b0b; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; margin: 0; }
+        .header { background: #1a1a1a; padding: 20px; border-bottom: 2px solid #00ff00; }
+        .container { padding: 20px; }
+        video { width: 100%; max-width: 600px; border: 2px solid #333; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); }
+        
+        /* Box la Malipo */
+        #paymentBox {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            padding: 30px;
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            width: 85%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+        h2 { color: #00ff00; margin-bottom: 10px; }
+        p { font-size: 14px; color: #bbb; }
+        .pay-btn { 
+            background: #00ff00; color: black; padding: 15px 30px; 
+            border: none; border-radius: 8px; font-weight: bold; 
+            font-size: 18px; cursor: pointer; width: 100%; margin-top: 20px;
+        }
+        .pay-btn:hover { background: #00cc00; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1 style="margin:0; font-size: 24px;">🛡️ DVARY SECURITY 🛡️</h1>
+</div>
+
+<div class="container">
+    <p>Video hii imefungwa. Tazama sekunde 10 kwanza.</p>
+    
+    <video id="myVideo" controls controlsList="nodownload">
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+
+    <div id="paymentBox">
+        <h2>🔒 VIDEO IMEFUNGWA</h2>
+        <p>Ili kuendelea kutazama video hii yote, unapaswa kulipia:</p>
+        <h1 style="color: #fff; margin: 10px 0;">TZS 500</h1>
+        <p><i>Chagua mtandao wowote (M-Pesa, Tigo, Airtel)</i></p>
+        
+        <button class="pay-btn" onclick="goToPayment()">LIPIA SASA</button>
+    </div>
+</div>
+
+<script>
+    var video = document.getElementById("myVideo");
+    var paymentBox = document.getElementById("paymentBox");
+
+    // Fungia video sekunde ya 10
+    video.ontimeupdate = function() {
+        if (video.currentTime >= 10) {
+            video.pause();
+            video.currentTime = 10;
+            paymentBox.style.display = "block";
+            // Kuzuia mtu asirudishe nyuma kirahisi
+            if (document.exitPointerLock) { document.exitPointerLock(); }
+        }
+    };
+
+    function goToPayment() {
+        // HAPA NDIPO UJANJA ULIPO:
+        // Badilisha hii link iwe ile "Payment Link" uliyoitengeneza AzamPay
+        window.location.href = "https://azampay.com/l/dvary-premium-123"; 
+    }
+</script>
+
+</body>
+</html>
