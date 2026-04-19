@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedLink | Hospital Handover</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>MedLink</h2>
+        <nav>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Results Inbox</a>
+            <a href="#">Patient Records</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Medical Results Portal</h1>
+            <p>Send and receive patient results securely.</p>
+        </header>
+
+        <section class="form-container">
+            <h3>Send New Result</h3>
+            <div class="input-group">
+                <input type="text" id="patientId" placeholder="Patient ID (e.g. PN-2026)">
+                <select id="receiverDoctor">
+                    <option value="">Select Receiver Doctor</option>
+                    <option value="dr_john">Dr. John (Surgery)</option>
+                    <option value="dr_anna">Dr. Anna (Cardiology)</option>
+                </select>
+            </div>
+            <textarea id="findings" placeholder="Write medical findings/remarks here..."></textarea>
+            <button class="btn-send" onclick="sendResult()">Generate & Send Secure Link</button>
+        </section>
+
+        <section class="inbox">
+            <h3>Recent Activities (Live)</h3>
+            <div id="activityLog">
+                </div>
+        </section>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
