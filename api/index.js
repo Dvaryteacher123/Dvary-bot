@@ -1,48 +1,38 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
 const app = express();
 
-app.use(cors());
+// Huu ndio ulinzi wa CORS - tunaufungua wote
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Database ya muda (Inatunza miamala ya sasa hivi)
 let transactions = [];
 
-// Inaruhusu kuonyesha ukurasa wa malipo (index.html)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+    res.send("Dvary Server is Live! Chaji ya Elia: 6%");
 });
 
-// Webhook: Inapokea data kutoka kwenye SMS Forwarder App
+// Tunabadilisha iweze kupokea kila aina ya data (JSON au URL Encoded)
 app.post('/api/webhook', (req, res) => {
-    const smsBody = req.body.message || ""; 
-    const txnMatch = smsBody.match(/[A-Z0-9]{10}/); // Inatafuta ID ya herufi/namba 10
+    console.log("Data imeingia:", req.body);
+    const smsBody = req.body.message || req.body.text || "";
+    const txnMatch = smsBody.match(/[A-Z0-9]{10}/);
     
-    if (txnMatch && (smsBody.includes("2000") || smsBody.includes("2,000"))) {
-        const txnId = txnMatch[0];
-        if (!transactions.includes(txnId)) {
-            transactions.push(txnId);
-            console.log("Muamala Mpya umepokelewa:", txnId);
-        }
+    if (txnMatch) {
+        transactions.push(txnMatch[0]);
+        return res.status(200).json({ status: "ok" });
     }
-    res.status(200).send("SMS Imepokelewa");
+    res.status(400).send("No ID found");
 });
 
-// Verify: Inatumiwa na Website kuhakiki kama mteja amelipa
 app.get('/api/verify', (req, res) => {
-    const customerTxn = req.query.txnId;
-    if (transactions.includes(customerTxn)) {
-        res.json({ 
-            status: "success", 
-            link: "https://whatsapp.com/channel/0029VbBaKXB1t90W0S24QU0m" 
-        });
+    const txn = req.query.txnId;
+    if (transactions.includes(txn)) {
+        res.json({ status: "success", link: "https://whatsapp.com/channel/0029VbBaKXB1t90W0S24QU0m" });
     } else {
-        res.json({ 
-            status: "failed", 
-            message: "Muamala haujapatikana! Lipia 2,000 kwanza kisha ujaribu tena." 
-        });
+        res.json({ status: "failed", message: "ID haipo! Jaribu tena." });
     }
 });
 
