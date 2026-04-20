@@ -11,70 +11,41 @@
         .price { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #ff9800; }
         .info-box { background: #262a2a; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #4caf50; }
         input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: #0e1111; color: white; box-sizing: border-box; text-align: center; font-size: 18px; outline: none; }
-        input:focus { border-color: #4caf50; }
         button { width: 100%; padding: 15px; border-radius: 30px; border: none; background: #4caf50; color: white; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #45a049; }
-        #msg { margin-top: 15px; font-weight: bold; font-size: 14px; min-height: 20px; }
+        #msg { margin-top: 15px; font-weight: bold; font-size: 13px; }
     </style>
 </head>
 <body>
-
 <div class="container">
     <h2>DVARY CHANNEL</h2>
     <div class="price">TSH 2,000/=</div>
-    
-    <div class="info-box">
-        Lipa kwenda M-PESA:<br>
-        <b>0799 203 820</b><br>
-        <small>Abdallah Manyama</small>
-    </div>
-
+    <div class="info-box">Lipa kwenda M-PESA:<br><b>0799 203 820</b><br><small>Abdallah Manyama</small></div>
     <input type="text" id="txn_id" placeholder="Weka Transaction ID hapa">
     <button onclick="checkPay()">HAKIKI NA JOIN</button>
     <div id="msg"></div>
 </div>
-
 <script>
     function checkPay() {
         const txn = document.getElementById('txn_id').value.trim();
         const msg = document.getElementById('msg');
-        
-        if(!txn) { 
-            msg.innerHTML = "Tafadhali weka namba ya muamala!"; 
-            msg.style.color = "#ff5252"; 
-            return; 
-        }
-        
-        msg.innerHTML = "Inahakiki... Subiri kidogo.";
-        msg.style.color = "white";
+        if(!txn) { msg.innerHTML = "Weka namba ya muamala!"; msg.style.color = "red"; return; }
+        msg.innerHTML = "Inahakiki..."; msg.style.color = "white";
 
-        // Tunatumia link kamili ili kuepuka makosa ya njia (Path Errors)
-        const apiUrl = `https://dvary-bot-letf.vercel.app/api/verify?txnId=${txn}`;
-
-        fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            if(data.status === "success") {
+        // Mbinu ya ujasusi: Inatafuta API kwenye link yoyote ya Vercel uliyonayo
+        fetch(`/api/verify?txnId=${txn}`)
+        .then(r => r.json())
+        .then(d => {
+            if(d.status === "success") {
                 msg.innerHTML = "SAHIHI! Unapelekwa kwenye Channel...";
                 msg.style.color = "#4caf50";
-                setTimeout(() => {
-                    window.location.href = data.link;
-                }, 2000);
+                setTimeout(() => window.location.href = d.link, 2000);
             } else {
-                msg.innerHTML = data.message;
+                msg.innerHTML = d.message;
                 msg.style.color = "#ff5252";
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            msg.innerHTML = "Hitilafu ya mtandao! Hakikisha una MB na ujaribu tena.";
-            msg.style.color = "#ff5252";
-        });
+        .catch(() => { msg.innerHTML = "Hitilafu ya mtandao! Jaribu tena."; msg.style.color = "#ff5252"; });
     }
 </script>
-
 </body>
 </html>
