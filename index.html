@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dvary Payment Portal</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0e1111; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #1a1d1d; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; width: 90%; max-width: 400px; border: 1px solid #333; }
+        h2 { color: #4caf50; margin-bottom: 5px; }
+        .price { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #ff9800; }
+        .info-box { background: #262a2a; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #4caf50; }
+        input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: #0e1111; color: white; box-sizing: border-box; text-align: center; font-size: 18px; }
+        button { width: 100%; padding: 15px; border-radius: 30px; border: none; background: #4caf50; color: white; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #45a049; }
+        #msg { margin-top: 15px; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>DVARY CHANNEL</h2>
+    <div class="price">TSH 2,000/=</div>
+    
+    <div class="info-box">
+        Lipa kwenda M-PESA:<br>
+        <b>0799 203 820</b><br>
+        <small>Abdallah Manyama</small>
+    </div>
+
+    <input type="text" id="txn_id" placeholder="Weka Transaction ID hapa">
+    <button onclick="checkPay()">HAKIKI NA JOIN</button>
+    <div id="msg"></div>
+</div>
+
+<script>
+    function checkPay() {
+        const txn = document.getElementById('txn_id').value.trim();
+        const msg = document.getElementById('msg');
+        if(!txn) { msg.innerHTML = "Weka namba ya muamala!"; msg.style.color = "red"; return; }
+        
+        msg.innerHTML = "Inahakiki...";
+        msg.style.color = "white";
+
+        fetch(`/api/verify?txnId=${txn}`)
+        .then(r => r.json())
+        .then(d => {
+            if(d.status === "success") {
+                msg.innerHTML = "SAHIHI! Unapelekwa kwenye Channel...";
+                msg.style.color = "#4caf50";
+                setTimeout(() => window.location.href = d.link, 2000);
+            } else {
+                msg.innerHTML = d.message;
+                msg.style.color = "#ff5252";
+            }
+        })
+        .catch(() => { msg.innerHTML = "Hitilafu! Jaribu tena."; msg.style.color = "red"; });
+    }
+</script>
+
+</body>
+</html>
+
