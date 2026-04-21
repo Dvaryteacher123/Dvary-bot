@@ -3,49 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dvary Payment Portal</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #0e1111; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .container { background: #1a1d1d; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; width: 90%; max-width: 400px; border: 1px solid #333; }
-        h2 { color: #4caf50; margin-bottom: 5px; }
-        .price { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #ff9800; }
-        .info-box { background: #262a2a; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 5px solid #4caf50; }
-        input { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: #0e1111; color: white; box-sizing: border-box; text-align: center; font-size: 18px; outline: none; }
-        button { width: 100%; padding: 15px; border-radius: 30px; border: none; background: #4caf50; color: white; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        #msg { margin-top: 15px; font-weight: bold; font-size: 13px; }
+        body { background: #020617; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e293b; padding: 25px; border-radius: 20px; text-align: center; width: 350px; border: 1px solid #334155; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        h2 { color: #a855f7; margin-bottom: 10px; }
+        input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 12px; border: none; background: #0f172a; color: white; text-align: center; font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; border-radius: 12px; border: none; background: linear-gradient(90deg, #6366f1, #a855f7); color: white; font-weight: bold; cursor: pointer; }
+        .success { display: none; margin-top: 20px; background: rgba(16, 185, 129, 0.2); padding: 15px; border-radius: 12px; border: 1px solid #10b981; }
+        .wa-btn { background: #25d366; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; display: inline-block; margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>DVARY CHANNEL</h2>
-    <div class="price">TSH 2,000/=</div>
-    <div class="info-box">Lipa kwenda M-PESA:<br><b>0799 203 820</b><br><small>Abdallah Manyama</small></div>
-    <input type="text" id="txn_id" placeholder="Weka Transaction ID hapa">
-    <button onclick="checkPay()">HAKIKI NA JOIN</button>
-    <div id="msg"></div>
-</div>
-<script>
-    function checkPay() {
-        const txn = document.getElementById('txn_id').value.trim();
-        const msg = document.getElementById('msg');
-        if(!txn) { msg.innerHTML = "Weka namba ya muamala!"; msg.style.color = "red"; return; }
-        msg.innerHTML = "Inahakiki..."; msg.style.color = "white";
 
-        // Mbinu ya ujasusi: Inatafuta API kwenye link yoyote ya Vercel uliyonayo
-        fetch(`/api/verify?txnId=${txn}`)
-        .then(r => r.json())
-        .then(d => {
-            if(d.status === "success") {
-                msg.innerHTML = "SAHIHI! Unapelekwa kwenye Channel...";
-                msg.style.color = "#4caf50";
-                setTimeout(() => window.location.href = d.link, 2000);
-            } else {
-                msg.innerHTML = d.message;
-                msg.style.color = "#ff5252";
-            }
-        })
-        .catch(() => { msg.innerHTML = "Hitilafu ya mtandao! Jaribu tena."; msg.style.color = "#ff5252"; });
+<div class="card">
+    <h2>DVARY PAY 🔒</h2>
+    <p style="font-size: 12px; color: #94a3b8;">Weka ID ya muamala uliopokea baada ya kutuma TZS 2,000.</p>
+    
+    <div id="input-area">
+        <input type="text" id="transId" placeholder="Mfano: SDC892KLS">
+        <button onclick="verify()">HAKIKI MALIPO</button>
+    </div>
+
+    <div id="success-area" class="success">
+        <p>✅ Malipo Yamethibitishwa!</p>
+        <a href="https://wa.me/2557XXXXXXXXX?text=Nimeshalipia_Link_Ya_Video" class="wa-btn">INGIA WHATSAPP</a>
+    </div>
+</div>
+
+<script>
+    async function verify() {
+        const id = document.getElementById('transId').value.trim();
+        if(!id) return alert("Andika ID kwanza!");
+
+        const response = await fetch(`/api/verify?id=${id}`);
+        const result = await response.json();
+
+        if (result.verified) {
+            document.getElementById('input-area').style.display = 'none';
+            document.getElementById('success-area').style.display = 'block';
+        } else {
+            alert("❌ ID Haipo! Hakikisha SMS imeshaingia au umeandika kwa usahihi.");
+        }
     }
 </script>
+
 </body>
 </html>
+
