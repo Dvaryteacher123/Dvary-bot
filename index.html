@@ -1,34 +1,37 @@
-<script>
-async function smartVerify() {
-    const fullText = document.getElementById('fullSms').value;
-    const match = fullText.match(/[A-Z0-9]{10,12}/);
+<div style="max-width: 400px; margin: auto; text-align: center; font-family: sans-serif;">
+    <h2>DVAR-PAY ⚡</h2>
+    <p>Lipia TZS 2,000 kwa <b>Elia (0799203820)</b></p>
+    <p>Kisha paste SMS yote ya muamala hapa chini:</p>
     
-    if (!match) {
-        return alert("❌ SMS haina ID sahihi. Hakikisha ume-copy SMS yote.");
-    }
+    <textarea id="smsInput" rows="5" style="width: 100%;" placeholder="Paste SMS hapa..."></textarea><br><br>
+    
+    <button onclick="checkPayment()" style="padding: 10px 20px; background: #25D366; color: white; border: none; cursor: pointer;">
+        HAKIKI NA UJIUNGE
+    </button>
+    
+    <p id="feedback" style="color: red;"></p>
+</div>
 
-    const id = match[0];
-    const btn = document.querySelector('button');
-    btn.disabled = true;
-    btn.innerText = "Inahakiki...";
+<script>
+async function checkPayment() {
+    const sms = document.getElementById('smsInput').value;
+    const feedback = document.getElementById('feedback');
+    
+    feedback.innerText = "Inahakiki...";
+    
+    const response = await fetch('/api/verify', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ fullSms: sms })
+    });
 
-    try {
-        const response = await fetch(`/api/verify?id=${id}`);
-        const result = await response.json();
-
-        if (result.verified) {
-            alert("✅ Malipo Yamethibitishwa!");
-            window.location.href = "https://wa.me/255618258121?text=Nimeshalipia_ID_" + id;
-        } else if (response.status === 429) {
-            alert("⚠️ Umezuiliwa kwa muda kwa sababu ya kujaribu ID za uongo.");
-        } else {
-            alert("❌ ID hii haipo au imeshatumika. Hakikisha SMS imeshaingia.");
-        }
-    } catch (err) {
-        alert("⚠️ Kuna tatizo la mtandao. Jaribu tena.");
-    } finally {
-        btn.disabled = false;
-        btn.innerText = "THIBITISHA MALIPO";
+    const data = await response.json();
+    if(data.success) {
+        alert("Malipo Safi! Unapelekwa kwenye Group sasa hivi.");
+        window.location.href = data.link;
+    } else {
+        feedback.innerText = data.message;
     }
 }
 </script>
+async 
