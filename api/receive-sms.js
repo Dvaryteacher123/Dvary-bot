@@ -1,27 +1,37 @@
-// Tunatumia hifadhi ya muda (Inabidi uunganishe na Supabase baadaye ili isipotee)
-let database_miamala = []; 
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 export default async function handler(req, res) {
-    if (req.method === 'POST') {
-        const { message } = req.body;
+    if (req.method !== 'POST') return res.status(405).json({ message: 'Method Not Allowed' });
 
-        // Tunatafuta muamala wa VODACOM (M-PESA)
-        // Mfano: "9ZJ8S92X4 Imethibitishwa. Umepokea TSh2,000 kutoka kwa..."
-        if (message.includes("Umepokea") && message.includes("TSh")) {
-            
-            // Tunachukua ile kodi ya muamala (mwanzoni mwa SMS ya M-Pesa)
-            const txnId = message.split(" ")[0]; 
-            
-            // Tunachukua kiasi (mfano 2,000)
-            const kiasiMatch = message.match(/TSh([\d,]+)/);
-            const kiasi = kiasiMatch ? kiasiMatch[1].replace(',', '') : "0";
+    const { fullSms } = req.body;
+    if (!fullSms) return res.status(400).json({ success: false, message: "SMS haipo!" });
 
-            database_miamala.push({ id: txnId, amount: kiasi });
-            
-            console.log(`Pesa Imeingia! ID: ${txnId}, Kiasi: ${kiasi}`);
-            return res.status(200).json({ status: "recorded" });
-        }
-        return res.status(400).send("Sio SMS ya malipo");
+    // Tunachukua ID pekee (Neno la kwanza la SMS)
+    const userTxnId = fullSms.split(" ")[0].toUpperCase();
+
+    // TUNAKAGUA SUPABASE: Lazima ID iwepo na iwe 'unused'
+    const { data, error } = await supabase
+        .from('payments')
+        .select('*')
+        .eq('txn_id', userTxnId)
+        .eq('status', 'unused')
+        .single();
+
+    if (data) {
+        // Ipo! Tunaifunga isitumiwe tena
+        await supabase.from('payments').update({ status: 'used' }).eq('txn_id', userTxnId);
+        
+        return res.status(200).json({ 
+            success: true, 
+            link: "https://whatsapp.com/channel/0029VbBaKXB1t90W0S24QU0m" 
+        });
+    } else {
+        // ID haipo au imeshatumika
+        return res.status(400).json({ 
+            success: false, 
+            message: "Namba ya muamala haipo au imeshatumika! Hakikisha ume-copy SMS yote." 
+        });
     }
 }
-
