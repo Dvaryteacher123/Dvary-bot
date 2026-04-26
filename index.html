@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dvary QR Pro - Elite</title>
+    <title>Dvary QR Pro - Elite Free</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root { --primary: #0088cc; --dark: #121212; --card: #1e1e1e; --success: #25D366; --warning: #ff9800; --danger: #f44336; }
@@ -24,7 +24,7 @@
         .btn-pay { background: var(--primary); color: white; }
         .btn-wa { background: var(--success); color: white; text-decoration: none; display: block; text-align: center; }
         
-        /* OPTION GRID ILIYOBORESHWA */
+        /* OPTION GRID NYINGI */
         .option-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; }
         .opt-btn { background: #2a2a2a; color: #aaa; padding: 10px; border-radius: 10px; border: 1px solid transparent; cursor: pointer; font-size: 11px; }
         .active-opt { border-color: var(--primary); color: white; background: #00334d; }
@@ -40,17 +40,18 @@
 <div class="container">
     <div id="lock" class="card">
         <div class="status-container">
-            <span class="badge bg-success">SERVER: ONLINE</span>
-            <span class="badge bg-warning">UPDATE: V2.1</span>
-            <span class="badge bg-danger">MAREKEBISHO: YAMEISHA</span>
+            <span class="badge bg-success">HUDUMA: BURE (FREE)</span>
+            <span class="badge bg-warning">OFFER: LAUNCH DAY</span>
+            <span class="badge bg-danger">MWISHO: HIVI KARIBUNI</span>
         </div>
 
         <h1>DVARY QR PRO</h1>
-        <p style="text-align: center; color: #bbb; font-size: 13px;">Weka Code kufungua utengeneze QR Code</p>
+        <p style="text-align: center; color: #25D366; font-weight: bold; margin-bottom: 5px;">🔥 OFA YA LEO: NI BURE KABISA!</p>
+        <p style="text-align: center; color: #bbb; font-size: 13px;">Bonyeza FUNGUA SASA kuanza kutumia huduma.</p>
         
-        <input type="text" id="pass" placeholder="Ingiza Code hapa...">
+        <input type="text" id="pass" placeholder="Andika FREE hapa (Si lazima)...">
         <button class="btn btn-pay" onclick="verify()">FUNGUA SASA</button>
-        <a href="https://wa.me/225752670587?text=Habari+Dvary,+nahitaji+Code+ya+QR+App" class="btn btn-wa">NUNUA CODE (WhatsApp)</a>
+        <a href="https://wa.me/225752670587?text=Habari+Dvary,+nimeona+QR+App+yako" class="btn btn-wa">NICHAT WHATSAPP</a>
     </div>
 
     <div id="app" class="card hidden">
@@ -86,33 +87,19 @@
             <button id="downloadBtn" class="btn" style="background: var(--success); color: white;" onclick="downloadQR()">📥 DOWNLOAD QR CODE</button>
         </div>
         
-        <button class="btn" style="background:#333; color:#888; font-size:12px; margin-top:30px;" onclick="location.reload()">LOGOUT</button>
+        <button class="btn" style="background:#333; color:#888; font-size:12px; margin-top:30px;" onclick="location.reload()">LOGOUT / FUNGA</button>
     </div>
     
     <div class="footer">Dvary Manyama Brand &copy; 2026</div>
 </div>
 
 <script>
-    const validCodes = [];
-    for(let i=101; i<=150; i++) { validCodes.push("DV" + i); }
-
     function verify() {
-        let input = document.getElementById('pass');
-        let code = input.value.toUpperCase().trim();
-        let used = JSON.parse(localStorage.getItem('dvary_expired_codes') || "[]");
-
-        if (used.includes(code)) {
-            alert("❌ CODE HII IMESHAISHA!");
-            return;
-        }
-
-        if(validCodes.includes(code)) {
-            used.push(code);
-            localStorage.setItem('dvary_expired_codes', JSON.stringify(used));
-            document.getElementById('lock').classList.add('hidden');
-            document.getElementById('app').classList.remove('hidden');
-            setMode('link');
-        } else { alert("❌ CODE SIO SAHIHI!"); }
+        // FREE MODE: Inafungua bila kujali neno lililoandikwa
+        alert("🎁 KARIBU: Furahia huduma ya Dvary QR Pro bure kwa muda mfupi!");
+        document.getElementById('lock').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        setMode('link');
     }
 
     let mode = 'link';
@@ -182,4 +169,4 @@
 
 </body>
 </html>
- 
+
